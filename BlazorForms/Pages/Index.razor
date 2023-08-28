@@ -1,0 +1,37 @@
+﻿@page "/"
+
+<PageTitle>Blazor Forms</PageTitle>
+
+<h1>Login</h1>
+
+<EditForm Model="@UserData" OnSubmit="@Submit">
+    <div style="margin-bottom: 10px;">
+        <div>Username</div>
+        <InputText @bind-Value="UserData.Username" />
+    </div>
+    <div style="margin-bottom: 10px;">
+        <div>Password</div>
+        <InputText type="password" @bind-Value="UserData.Password" />
+    </div>
+    <button class="btn btn-primary" type="submit">Log in</button>
+    <button class="btn btn-secondary" type="reset">Reset</button>
+</EditForm>
+
+<p style="margin-top: 20px;">@FormCompletedText</p>
+
+@code {
+    public User UserData { get; set; } = new User();
+    public string FormCompletedText { get; set; } = "";
+
+    public void Submit()
+    {
+        FormCompletedText = $"User {UserData.Username} logged in.";
+        UserData = new User();
+    }
+
+    public class User
+    {
+        public string Username { get; set; } = "";
+        public string Password { get; set; } = "";
+    }
+}
